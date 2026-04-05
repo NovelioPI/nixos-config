@@ -64,6 +64,39 @@ Edit this for:
 - Kernel modules and boot parameters.
 - CPU specific settings (AMD/Intel microcode).
 
+## Adding a New Host
+
+To add a new machine to this configuration:
+
+1. **Create a new host directory**:
+   ```bash
+   mkdir -p modules/hosts/<hostname>
+   ```
+
+2. **Add core files**:
+   Create the following files in your new host directory:
+   - `default.nix`: Defines the `nixosConfiguration` for the host.
+   - `configuration.nix`: Main system configuration (imports features and hardware).
+   - `hardware.nix`: Hardware-specific settings (generate using `nixos-generate-config`).
+
+3. **Sample `default.nix`**:
+   ```nix
+   { self, inputs, ... }: 
+   {
+     flake.nixosConfigurations.<hostname> = inputs.nixpkgs.lib.nixosSystem {
+       modules = [ self.nixosModules.<hostname>Configuration ];
+     };
+   }
+   ```
+
+4. **Define modules**:
+   Ensure `configuration.nix` and `hardware.nix` define their respective modules (e.g., `<hostname>Configuration` and `<hostname>Hardware`) within the `flake.nixosModules` attribute, similar to the `pc` host.
+
+5. **Build the new host**:
+   ```bash
+   sudo nixos-rebuild switch --flake .#<hostname>
+   ```
+
 ## Resources for Learning
 
 - **[NixOS Official Documentation](https://nixos.org/learn.html)**: Start here for basics.
