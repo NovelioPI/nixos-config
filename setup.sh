@@ -72,7 +72,13 @@ cat <<EOF > vars.nix
 }
 EOF
 
-echo -e "${GREEN}Configuration saved to vars.nix!${NC}"
+# Ensure vars.nix is tracked by git (intent-to-add) so flakes can see it,
+# even if it's ignored in .gitignore.
+if [ -d .git ]; then
+    git add -N -f vars.nix
+fi
+
+echo -e "${GREEN}Configuration saved to vars.nix and tracked locally for Flakes!${NC}"
 echo ""
 echo "Next steps:"
 echo "1. Edit hardware configuration: modules/hosts/pc/hardware.nix"
