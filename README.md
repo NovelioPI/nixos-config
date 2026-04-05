@@ -1,4 +1,4 @@
-# Welcome to nixos-config! 🌟
+# Welcome to my NixOS config! 🌟
 
 This is my personal home for all things NixOS, and I'm happy to share it with you. I've spent a lot of time tweaking and refining this setup to make it feel just right. My goal is to make this a friendly, easy-to-use starting point for anyone who wants a reliable and beautiful system without all the headache.
 
