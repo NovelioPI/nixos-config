@@ -52,11 +52,6 @@ in
     };
     services.xserver.videoDrivers = [ vars.vgaType ];
 
-    services.xserver.xkb = {
-      layout = vars.layout;
-      variant = "";
-    };
-
     services.printing.enable = true;
 
     services.pulseaudio.enable = false;

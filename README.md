@@ -26,7 +26,7 @@ Feel free to explore, use what you like, and make it your own!
    ```bash
    ./setup.sh
    ```
-   Follow the prompts to configure your username, hostname, timezone, locale, and GPU type. This will generate a `vars.nix` file.
+   Follow the prompts to configure your username, full name, hostname, timezone, locale, and GPU type. This will generate a `vars.nix` file.
 
 3. **Check your hardware configuration**:
    Verify the disk UUIDs and kernel modules in `modules/hosts/pc/hardware.nix`. If you are installing on a new machine, you should generate your own hardware configuration:

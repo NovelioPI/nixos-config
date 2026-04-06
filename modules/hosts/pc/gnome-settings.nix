@@ -2,11 +2,6 @@
 
 {
   flake.nixosModules.pcGnomeSettings = { config, pkgs, lib, ... }: 
-  let
-    vars = import (self + "/vars.nix");
-    layouts = lib.splitString "," vars.layout;
-    sources = lib.concatStringsSep ", " (map (l: "('xkb', '${l}')") layouts);
-  in
   {
     services.desktopManager.gnome.extraGSettingsOverrides = ''
       # Accent color and dark mode preference
@@ -14,10 +9,10 @@
       accent-color='pink'
       color-scheme='prefer-dark'
 
-      # Configure keyboard layouts from vars.nix
+      # Configure keyboard layouts
       [org.gnome.desktop.input-sources]
-      sources=[${sources}]
-      mru-sources=[${sources}]
+      sources=[('xkb', 'us'), ('ibus', 'mozc-jp')]
+      show-all-sources=true
 
       [org.gnome.desktop.background]
       color-shading-type='solid'

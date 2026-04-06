@@ -18,7 +18,6 @@ if [ -f vars.nix ]; then
     CURRENT_HOSTNAME=$(grep "hostname =" vars.nix | cut -d'"' -f2)
     CURRENT_TIMEZONE=$(grep "timezone =" vars.nix | cut -d'"' -f2)
     CURRENT_LOCALE=$(grep "locale =" vars.nix | cut -d'"' -f2)
-    CURRENT_LAYOUT=$(grep "layout =" vars.nix | cut -d'"' -f2)
     CURRENT_VGATYPE=$(grep "vgaType =" vars.nix | cut -d'"' -f2)
 else
     CURRENT_USERNAME=$(whoami)
@@ -26,7 +25,6 @@ else
     CURRENT_HOSTNAME="nixos-pc"
     CURRENT_TIMEZONE="UTC"
     CURRENT_LOCALE="en_US.UTF-8"
-    CURRENT_LAYOUT="us"
     CURRENT_VGATYPE="amdgpu"
 fi
 
@@ -44,9 +42,6 @@ TIMEZONE=${TIMEZONE:-$CURRENT_TIMEZONE}
 
 read -p "Enter locale [$CURRENT_LOCALE]: " LOCALE
 LOCALE=${LOCALE:-$CURRENT_LOCALE}
-
-read -p "Enter keyboard layout (comma separated, e.g., us,id,jp) [$CURRENT_LAYOUT]: " LAYOUT
-LAYOUT=${LAYOUT:-$CURRENT_LAYOUT}
 
 echo "Select VGA type:"
 echo "1) amdgpu"
@@ -67,7 +62,6 @@ cat <<EOF > vars.nix
   hostname = "$HOSTNAME";
   timezone = "$TIMEZONE";
   locale = "$LOCALE";
-  layout = "$LAYOUT";
   vgaType = "$VGATYPE";
 }
 EOF
